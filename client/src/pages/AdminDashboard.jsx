@@ -9,12 +9,16 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { io } from 'socket.io-client';
+import FiltrosDashboard from '../components/FiltrosDashboard';
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('appointments');
+
+  // ADICIONADO: Estado para controlar o filtro de datas (Hoje, Amanhã, Todos)
+  const [abaAtiva, setAbaAtiva] = useState('hoje');
 
   // Gatilho seguro para atualizar a tabela via WebSockets
   const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -173,6 +177,9 @@ export default function AdminDashboard() {
 
       {activeTab === 'appointments' && (
         <div>
+          {/* ADICIONADO: O componente de Filtros sendo renderizado apenas na aba de Agenda */}
+          <FiltrosDashboard abaAtiva={abaAtiva} setAbaAtiva={setAbaAtiva} />
+
           {loadingAppointments ? <Spinner /> : (
             <div className="bg-white dark:bg-barber-cardDark border border-gray-100 dark:border-gray-800 rounded-3xl p-6 overflow-x-auto shadow-sm">
               <table className="w-full text-left min-w-[600px]">
