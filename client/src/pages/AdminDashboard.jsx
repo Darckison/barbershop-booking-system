@@ -5,7 +5,8 @@ import api from '../api/axios';
 import toast from 'react-hot-toast';
 import {
   PlusIcon, PencilSquareIcon, TrashIcon,
-  ArrowPathIcon, XMarkIcon, CalendarDaysIcon
+  ArrowPathIcon, XMarkIcon, CalendarDaysIcon,
+  ClockIcon
 } from '@heroicons/react/24/outline';
 
 import { io } from 'socket.io-client';
@@ -237,9 +238,17 @@ export default function AdminDashboard() {
                 <div key={service._id} className="bg-white dark:bg-barber-cardDark border border-gray-100 dark:border-gray-800 p-6 rounded-3xl shadow-sm hover:border-barber-primary transition-colors group">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">{service.name}</h3>
-                    <span className="font-black text-barber-primary">R$ {service.price.toFixed(2)}</span>
+                    <span className="font-black text-barber-primary">R$ {Number(service.price).toFixed(2)}</span>
                   </div>
-                  <p className="text-gray-500 text-sm mb-6">{service.description}</p>
+                  
+                  {/* Ajustei o mb-6 para mb-4 aqui na descrição */}
+                  <p className="text-gray-500 text-sm mb-4">{service.description}</p>
+
+                  {/* ADICIONADO: O ícone do relógio com o tempo do serviço */}
+                  <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-6">
+                    <ClockIcon className="w-4 h-4" />
+                    <span>{service.durationMinutes} minutos</span>
+                  </div>
 
                   <div className="flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                     <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 py-2 rounded-xl font-bold hover:bg-blue-100 transition">
