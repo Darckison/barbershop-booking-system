@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  // Se existir a URL da nuvem ele usa, senão usa o localhost (para quando você for testar no PC)
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000'
 });
 
 api.interceptors.request.use((config) => {
