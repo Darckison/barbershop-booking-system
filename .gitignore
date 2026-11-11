@@ -1,0 +1,12 @@
+# Ignorar dependências pesadas de ambas as pastas
+client/node_modules/
+server/node_modules/
+
+# Ignorar variáveis de ambiente (Senhas e Banco de Dados)
+client/.env
+server/.env
+.env
+
+# Ignorar builds
+client/dist/
+client/build/
