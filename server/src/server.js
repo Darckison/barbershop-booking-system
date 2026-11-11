@@ -10,7 +10,7 @@ const server = http.createServer(app);
 // 4. Configura o Socket.io com permissão (CORS) para o seu frontend
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Porta padrão do Vite (ajuste se a sua for diferente)
+    origin: "*", // Porta padrão do Vite (ajuste se a sua for diferente)
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
   }
 });
