@@ -66,7 +66,8 @@ Inicie a aplicação React:
 npm run dev
 ```
 
-Acesse o sistema no seu navegador: `http://localhost:5173`
+Link do Repositório: https://github.com/Darckison/barbershop-booking-system
 
 ---
-**Desenvolvido por:** Darckison Almeida Trajanp e Wesley Silva Araújo
+**Desenvolvido por:** Darckison Almeida Trajano e Wesley Silva Araújo
+
