@@ -30,7 +30,7 @@ Para executar este projeto, você precisará do [Node.js](https://nodejs.org/) i
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://github.com/Darckison/barbershop-booking-system.git
+git clone https://github.com/Darckison/barbershop-booking-system.gi
 cd barbershop-booking-system
 ```
 
