@@ -30,7 +30,7 @@ Para executar este projeto, você precisará do [Node.js](https://nodejs.org/) i
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://github.com/SEU-USUARIO/barbershop-booking-system.git
+git clone https://github.com/Darckison/barbershop-booking-system.git
 cd barbershop-booking-system
 ```
 
@@ -69,4 +69,4 @@ npm run dev
 Acesse o sistema no seu navegador: `http://localhost:5173`
 
 ---
-**Desenvolvido por:** [Seu Nome] e [Nome da sua Dupla]
+**Desenvolvido por:** Darckison Almeida Trajanp e Wesley Silva Araújo
