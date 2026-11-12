@@ -141,17 +141,16 @@ export default function AdminDashboard() {
   if (authLoading || !isAdmin) return <Spinner />;
 
   return (
-    <div className="max-w-6xl mx-auto w-full animate-in fade-in duration-500">
+    <div className="max-w-6xl mx-auto w-full animate-in fade-in duration-500 text-gray-900 dark:text-white">
+      {/* Título limpo e profissional */}
       <div className="mb-8">
-        <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
-          Painel de <span className="text-blue-600 dark:text-blue-400">Gestão</span>
-        </h2>
+        <h2 className="text-3xl font-black mb-2">Painel de Gestão</h2>
         <p className="text-gray-600 dark:text-gray-300">Área exclusiva para administração da Krattos Barber.</p>
       </div>
 
       <div className="flex gap-4 mb-8 border-b border-gray-200 dark:border-gray-800 pb-4 overflow-x-auto scrollbar-hide">
         <button onClick={() => setActiveTab('appointments')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'appointments' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'}`}>Agenda Geral</button>
-        <button onClick={() => setActiveTab('services')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'services' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'}`}>CRUD de <span className="text-blue-600 dark:text-blue-400">Serviços</span></button>
+        <button onClick={() => setActiveTab('services')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'services' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'}`}>CRUD de Serviços</button>
       </div>
 
       {activeTab === 'appointments' && (
@@ -167,7 +166,7 @@ export default function AdminDashboard() {
             </button>
             <button onClick={() => setAbaAtiva('todos')} className={`flex flex-col items-center justify-center w-32 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'todos' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-800 dark:text-white border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
               <span className="text-sm">TODOS</span>
-              <span className="text-xs font-normal mt-1 text-blue-500">Histórico</span>
+              <span className="text-xs font-normal mt-1 text-gray-500 dark:text-gray-400">Histórico</span>
             </button>
           </div>
 
@@ -197,7 +196,7 @@ export default function AdminDashboard() {
                         <td className="py-4 px-4 font-bold text-gray-900 dark:text-white">{appt.user?.name || 'Desconhecido'}</td>
                         <td className="py-4 px-4 text-gray-700 dark:text-gray-300">{appt.service?.name}</td>
                         <td className="py-4 px-4 text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                          <CalendarDaysIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          <CalendarDaysIcon className="w-4 h-4 text-red-600 dark:text-red-500" />
                           {appt.date.includes('/') ? appt.date : appt.date.split('T')[0].split('-').reverse().join('/')} às <span className="font-bold text-gray-900 dark:text-white">{appt.startTime}</span>
                         </td>
                         <td className="py-4 px-4">
@@ -229,10 +228,10 @@ export default function AdminDashboard() {
                     <span className="font-black text-red-600 dark:text-red-500">R$ {Number(service.price).toFixed(2)}</span>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{service.description}</p>
-                  <div className="flex items-center gap-1 text-sm font-medium text-gray-600 dark:text-gray-300 mb-6"><ClockIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" /><span>{service.durationMinutes} min</span></div>
+                  <div className="flex items-center gap-1 text-sm font-medium text-gray-600 dark:text-gray-300 mb-6"><ClockIcon className="w-4 h-4 text-gray-400" /><span>{service.durationMinutes} min</span></div>
                   <div className="flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30 py-2 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/40 transition"><PencilSquareIcon className="w-4 h-4" /> Editar</button>
-                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-500/30 py-2 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
+                    <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700 py-2 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition"><PencilSquareIcon className="w-4 h-4" /> Editar</button>
+                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 py-2 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
                   </div>
                 </div>
               ))}

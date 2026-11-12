@@ -23,7 +23,6 @@ export default function MyAppointments() {
 
   const fetchAppointments = async () => {
     try {
-      // CORRIGIDO AQUI: Volta a usar a rota correta do cliente (/appointments/my)
       const { data } = await api.get('/appointments/my');
       setAppointments(data);
     } catch (error) {
@@ -61,7 +60,7 @@ export default function MyAppointments() {
     <div className="max-w-4xl mx-auto w-full animate-in fade-in duration-500">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">Os <span className="text-blue-600 dark:text-blue-400">Meus Agendamentos</span></h2>
+          <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">Meus Agendamentos</h2>
           <p className="text-gray-600 dark:text-gray-400">Acompanhe o seu histórico na Krattos Barber.</p>
         </div>
         <Link to="/agendar" className="hidden md:flex bg-red-600 text-white px-5 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-[0_0_15px_rgba(220,38,38,0.4)]">
@@ -98,7 +97,7 @@ export default function MyAppointments() {
                 </div>
                 
                 <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-4">
-                  <ClockIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <ClockIcon className="w-5 h-5 text-gray-400" />
                   <span>{appt.startTime} • {appt.service.durationMinutes} min</span>
                 </div>
               </div>
