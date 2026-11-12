@@ -28,18 +28,6 @@ export default function AdminDashboard() {
   const [editingServiceId, setEditingServiceId] = useState(null);
   const [serviceForm, setServiceForm] = useState({ name: '', description: '', price: '', durationMinutes: '' });
 
-  useEffect(() => {
-    if (!isAdmin) return;
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    const socket = io(backendUrl);
-
-    socket.on('novo-agendamento', (dados) => {
-      toast.success(dados.mensagem, { icon: '💈', duration: 6000, style: { border: '2px solid #DC2626', background: '#121212', color: '#fff', padding: '16px' } });
-      setTimeout(() => setRefreshTrigger(prev => prev + 1), 500);
-    });
-    return () => socket.disconnect();
-  }, [isAdmin]);
-
   const fetchAppointments = useCallback(async () => {
     setLoadingAppointments(true);
     try {
@@ -64,6 +52,21 @@ export default function AdminDashboard() {
       setLoadingServices(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const socket = io(backendUrl);
+
+    socket.on('novo-agendamento', (dados) => {
+      toast.success(dados.mensagem, { icon: '💈', duration: 6000, style: { border: '2px solid #DC2626', background: '#121212', color: '#fff', padding: '16px' } });
+      
+      // ATUALIZAÇÃO AUTOMÁTICA DA TABELA DO ADMIN EM TEMPO REAL
+      fetchAppointments();
+    });
+
+    return () => socket.disconnect();
+  }, [isAdmin, fetchAppointments]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -142,7 +145,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="max-w-6xl mx-auto w-full animate-in fade-in duration-500 text-gray-900 dark:text-white">
-      {/* Título limpo e profissional */}
       <div className="mb-8">
         <h2 className="text-3xl font-black mb-2">Painel de Gestão</h2>
         <p className="text-gray-600 dark:text-gray-300">Área exclusiva para administração da Krattos Barber.</p>
