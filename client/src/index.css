@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* Configuração global para alternar perfeitamente entre modo claro e escuro */
 body {
-  background-color: #0A0A0A; /* Fundo preto/cinza bem escuro */
-  color: #FFFFFF; /* Texto padrão branco */
-}}
+  background-color: #F3F4F6 !important; /* Fundo claro limpo no modo claro */
+  color: #111827 !important;            /* Texto escuro nítido no modo claro */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body, html.dark body {
+  background-color: #0A0A0A !important; /* Fundo preto no modo escuro */
+  color: #FFFFFF !important;            /* Texto branco no modo escuro */
+}
