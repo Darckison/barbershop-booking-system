@@ -12,7 +12,9 @@ const getAvailableSlots = async (req, res, next) => {
     const config = await Availability.findOne();
     if (!config) return res.status(500).json({ message: 'Configuração ausente.' });
     const appointments = await Appointment.find({ date, status: { $ne: 'cancelled' } });
-    return res.status(200).json(generateDailySlots({ dateStr: date, serviceDuration: service.durationMinutes, availabilityConfig: config, existingAppointments: appointments }));
+    
+    // CORRIGIDO AQUI: Number(service.durationMinutes)
+    return res.status(200).json(generateDailySlots({ dateStr: date, serviceDuration: Number(service.durationMinutes), availabilityConfig: config, existingAppointments: appointments }));
   } catch (error) { next(error); }
 };
 
@@ -37,7 +39,8 @@ const createAppointment = async (req, res, next) => {
     if (!daySchedule || !daySchedule.isOpen) return res.status(400).json({ message: 'Fechado neste dia da semana.' });
 
     const startMin = timeToMinutes(startTime);
-    const endMin = startMin + service.durationMinutes;
+    // CORRIGIDO AQUI: Number(service.durationMinutes)
+    const endMin = startMin + Number(service.durationMinutes);
     const endTime = minutesToTime(endMin);
 
     const openMin = timeToMinutes(daySchedule.openTime);
@@ -55,14 +58,12 @@ const createAppointment = async (req, res, next) => {
     const appointment = await Appointment.create({ user: userId, service: serviceId, date, startTime, endTime, notes: notes || '', status: 'pending' });
     const populated = await Appointment.findById(appointment._id).populate('user', 'name email phone').populate('service', 'name price durationMinutes');
     
-    // --- ADICIONADO AQUI: DISPARO DO SOCKET.IO ---
     const io = req.app.get('io');
     if (io) {
       io.emit('novo-agendamento', { 
         mensagem: 'Novo agendamento recebido na barbearia!' 
       });
     }
-    // ----------------------------------------------
 
     return res.status(201).json(populated);
   } catch (error) { next(error); }
@@ -115,7 +116,8 @@ const updateAppointmentAdmin = async (req, res, next) => {
     const targetDate = req.body.date || appointment.date;
     const targetStartTime = req.body.startTime || appointment.startTime;
     const startMin = timeToMinutes(targetStartTime);
-    const endMin = startMin + service.durationMinutes;
+    // CORRIGIDO AQUI: Number(service.durationMinutes)
+    const endMin = startMin + Number(service.durationMinutes);
 
     const existing = await Appointment.find({ _id: { $ne: appointment._id }, date: targetDate, status: { $ne: 'cancelled' } });
     const hasCollision = existing.some((appt) => checkOverlap(startMin, endMin, timeToMinutes(appt.startTime), timeToMinutes(appt.endTime)));
