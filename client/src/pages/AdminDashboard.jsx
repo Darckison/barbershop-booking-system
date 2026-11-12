@@ -53,19 +53,33 @@ export default function AdminDashboard() {
     }
   }, []);
 
+  // CONFIGURAÇÃO DO SOCKET.IO COM OUVINTES MÚLTIPLOS PARA GARANTIR A ATUALIZAÇÃO
   useEffect(() => {
     if (!isAdmin) return;
     const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     const socket = io(backendUrl);
 
-    socket.on('novo-agendamento', (dados) => {
-      toast.success(dados.mensagem, { icon: '💈', duration: 6000, style: { border: '2px solid #DC2626', background: '#121212', color: '#fff', padding: '16px' } });
-      
-      // ATUALIZAÇÃO AUTOMÁTICA DA TABELA DO ADMIN EM TEMPO REAL
+    const handleNovoAgendamento = (dados) => {
+      if (dados && dados.mensagem) {
+        toast.success(dados.mensagem, { 
+          icon: '💈', 
+          duration: 6000, 
+          style: { border: '2px solid #DC2626', background: '#121212', color: '#fff', padding: '16px' } 
+        });
+      }
+      // Força a recarga imediata dos dados e incrementa o gatilho
       fetchAppointments();
-    });
+      setRefreshTrigger(prev => prev + 1);
+    };
 
-    return () => socket.disconnect();
+    socket.on('novo-agendamento', handleNovoAgendamento);
+    socket.on('agendamento-criado', handleNovoAgendamento); // Caso o backend emita com este nome
+
+    return () => {
+      socket.off('novo-agendamento', handleNovoAgendamento);
+      socket.off('agendamento-criado', handleNovoAgendamento);
+      socket.disconnect();
+    };
   }, [isAdmin, fetchAppointments]);
 
   useEffect(() => {
@@ -233,7 +247,7 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-1 text-sm font-medium text-gray-600 dark:text-gray-300 mb-6"><ClockIcon className="w-4 h-4 text-gray-400" /><span>{service.durationMinutes} min</span></div>
                   <div className="flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                     <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700 py-2 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition"><PencilSquareIcon className="w-4 h-4" /> Editar</button>
-                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 py-2 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
+                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 dark:text-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-900/50 py-2 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
                   </div>
                 </div>
               ))}
