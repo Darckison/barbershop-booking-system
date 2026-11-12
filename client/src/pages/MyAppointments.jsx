@@ -23,7 +23,8 @@ export default function MyAppointments() {
 
   const fetchAppointments = async () => {
     try {
-      const { data } = await api.get('/appointments');
+      // CORRIGIDO AQUI: Volta a usar a rota correta do cliente (/appointments/my)
+      const { data } = await api.get('/appointments/my');
       setAppointments(data);
     } catch (error) {
       toast.error('Erro ao carregar os seus agendamentos.');
@@ -60,7 +61,6 @@ export default function MyAppointments() {
     <div className="max-w-4xl mx-auto w-full animate-in fade-in duration-500">
       <div className="flex items-center justify-between mb-8">
         <div>
-          {/* Título adaptativo para modo claro e escuro */}
           <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">Os <span className="text-blue-600 dark:text-blue-400">Meus Agendamentos</span></h2>
           <p className="text-gray-600 dark:text-gray-400">Acompanhe o seu histórico na Krattos Barber.</p>
         </div>
