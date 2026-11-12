@@ -135,7 +135,7 @@ export default function AdminDashboard() {
   };
 
   // ==========================================
-  // MOTOR DE FILTRAGEM DE DATAS
+  // MOTOR DE FILTRAGEM DE DATAS 
   // ==========================================
   const formatarDataIso = (dataObj) => {
     const ano = dataObj.getFullYear();
@@ -152,9 +152,16 @@ export default function AdminDashboard() {
   const dataAmanhaStr = formatarDataIso(amanha);
 
   const agendamentosFiltrados = appointments.filter(appt => {
-    if (abaAtiva === 'hoje') return appt.date === dataHojeStr;
-    if (abaAtiva === 'amanha') return appt.date === dataAmanhaStr;
-    return true; // 'todos' (Histórico)
+    // Garante que pega apenas a data (YYYY-MM-DD), cortando possíveis horas do banco
+    const dataAgendamento = appt.date.split('T')[0]; 
+    
+    // Transforma a palavra da aba em minúscula e remove acentos (AMANHÃ -> amanha)
+    const aba = String(abaAtiva).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+    if (aba === 'hoje') return dataAgendamento === dataHojeStr;
+    if (aba === 'amanha') return dataAgendamento === dataAmanhaStr;
+    
+    return true; // Se for "todos", passa direto
   });
   // ==========================================
 
