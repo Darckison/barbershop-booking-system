@@ -134,7 +134,7 @@ export default function AdminDashboard() {
   const Spinner = () => (
     <div className="flex flex-col items-center justify-center py-20">
       <ArrowPathIcon className="w-10 h-10 animate-spin text-red-600 mb-4" />
-      <p className="text-gray-400 font-medium">A carregar dados do servidor...</p>
+      <p className="text-gray-500 dark:text-gray-400 font-medium">A carregar dados do servidor...</p>
     </div>
   );
 
@@ -143,39 +143,41 @@ export default function AdminDashboard() {
   return (
     <div className="max-w-6xl mx-auto w-full animate-in fade-in duration-500">
       <div className="mb-8">
-        <h2 className="text-3xl font-black text-white mb-2">Painel de Gestão</h2>
-        <p className="text-gray-400">Área exclusiva para administração da Krattos Barber.</p>
+        <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
+          Painel de <span className="text-blue-600 dark:text-blue-400">Gestão</span>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400">Área exclusiva para administração da Krattos Barber.</p>
       </div>
 
-      <div className="flex gap-4 mb-8 border-b border-gray-800 pb-4 overflow-x-auto scrollbar-hide">
-        <button onClick={() => setActiveTab('appointments')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'appointments' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#121212] text-gray-400 hover:bg-gray-800'}`}>Agenda Geral</button>
-        <button onClick={() => setActiveTab('services')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'services' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#121212] text-gray-400 hover:bg-gray-800'}`}>CRUD de Serviços</button>
+      <div className="flex gap-4 mb-8 border-b border-gray-200 dark:border-gray-800 pb-4 overflow-x-auto scrollbar-hide">
+        <button onClick={() => setActiveTab('appointments')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'appointments' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'}`}>Agenda Geral</button>
+        <button onClick={() => setActiveTab('services')} className={`px-6 py-3 rounded-full font-bold transition whitespace-nowrap ${activeTab === 'services' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'}`}>CRUD de <span className="text-blue-600 dark:text-blue-400">Serviços</span></button>
       </div>
 
       {activeTab === 'appointments' && (
         <div>
           <div className="flex gap-3 mb-6">
-            <button onClick={() => setAbaAtiva('hoje')} className={`flex flex-col items-center justify-center w-28 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'hoje' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#121212] text-gray-400 border-gray-800 hover:bg-gray-800'}`}>
+            <button onClick={() => setAbaAtiva('hoje')} className={`flex flex-col items-center justify-center w-28 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'hoje' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
               <span className="text-sm">HOJE</span>
               <span className="text-xs font-normal mt-1">{dataHojeStr.split('-').reverse().slice(0,2).join('/')}</span>
             </button>
-            <button onClick={() => setAbaAtiva('amanha')} className={`flex flex-col items-center justify-center w-28 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'amanha' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#121212] text-gray-400 border-gray-800 hover:bg-gray-800'}`}>
+            <button onClick={() => setAbaAtiva('amanha')} className={`flex flex-col items-center justify-center w-28 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'amanha' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
               <span className="text-sm">AMANHÃ</span>
               <span className="text-xs font-normal mt-1">{dataAmanhaStr.split('-').reverse().slice(0,2).join('/')}</span>
             </button>
-            <button onClick={() => setAbaAtiva('todos')} className={`flex flex-col items-center justify-center w-32 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'todos' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#121212] text-gray-400 border-gray-800 hover:bg-gray-800'}`}>
+            <button onClick={() => setAbaAtiva('todos')} className={`flex flex-col items-center justify-center w-32 py-3 rounded-2xl font-bold transition border ${abaAtiva === 'todos' ? 'bg-red-600 text-white border-transparent shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white dark:bg-[#121212] text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
               <span className="text-sm">TODOS</span>
-              <span className="text-xs font-normal mt-1">Histórico</span>
+              <span className="text-xs font-normal mt-1 text-blue-500">Histórico</span>
             </button>
           </div>
 
           {loadingAppointments ? <Spinner /> : (
-            <div className="bg-[#121212] border border-gray-800/60 rounded-3xl p-6 overflow-x-auto shadow-sm relative">
+            <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800/60 rounded-3xl p-6 overflow-x-auto shadow-sm relative">
               <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-red-600/0 via-red-600/50 to-red-600/0"></div>
               
               <table className="w-full text-left min-w-[600px]">
                 <thead>
-                  <tr className="border-b border-gray-800 text-gray-500">
+                  <tr className="border-b border-gray-200 dark:border-gray-800 text-gray-500">
                     <th className="py-4 px-4 font-medium">Cliente</th>
                     <th className="py-4 px-4 font-medium">Serviço</th>
                     <th className="py-4 px-4 font-medium">Data / Hora</th>
@@ -191,15 +193,15 @@ export default function AdminDashboard() {
                     </tr>
                   ) : (
                     agendamentosFiltrados.map(appt => (
-                      <tr key={appt._id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
-                        <td className="py-4 px-4 font-bold text-white">{appt.user?.name || 'Desconhecido'}</td>
-                        <td className="py-4 px-4 text-gray-300">{appt.service?.name}</td>
-                        <td className="py-4 px-4 text-gray-400 flex items-center gap-2">
-                          <CalendarDaysIcon className="w-4 h-4 text-blue-500" />
-                          {appt.date.includes('/') ? appt.date : appt.date.split('T')[0].split('-').reverse().join('/')} às <span className="font-bold text-gray-200">{appt.startTime}</span>
+                      <tr key={appt._id} className="border-b border-gray-100 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                        <td className="py-4 px-4 font-bold text-gray-900 dark:text-white">{appt.user?.name || 'Desconhecido'}</td>
+                        <td className="py-4 px-4 text-gray-600 dark:text-gray-300">{appt.service?.name}</td>
+                        <td className="py-4 px-4 text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                          <CalendarDaysIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          {appt.date.includes('/') ? appt.date : appt.date.split('T')[0].split('-').reverse().join('/')} às <span className="font-bold text-gray-800 dark:text-gray-200">{appt.startTime}</span>
                         </td>
                         <td className="py-4 px-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${appt.status === 'cancelled' ? 'bg-red-900/20 text-red-500 border border-red-900/50' : 'bg-emerald-900/20 text-emerald-500 border border-emerald-900/50'}`}>{appt.status}</span>
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${appt.status === 'cancelled' ? 'bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-500 border border-red-200 dark:border-red-900/50' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-500 border border-emerald-200 dark:border-emerald-900/50'}`}>{appt.status}</span>
                         </td>
                       </tr>
                     ))
@@ -219,18 +221,18 @@ export default function AdminDashboard() {
           {loadingServices ? <Spinner /> : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {services.map(service => (
-                <div key={service._id} className="bg-[#121212] border border-gray-800 p-6 rounded-3xl hover:border-red-600/50 transition-all group relative overflow-hidden">
+                <div key={service._id} className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 p-6 rounded-3xl hover:border-red-600/50 transition-all group relative overflow-hidden shadow-sm">
                   <div className="absolute top-0 left-0 w-full h-[2px] bg-red-600/0 group-hover:bg-red-600/80 transition-all"></div>
                   
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold text-white">{service.name}</h3>
-                    <span className="font-black text-red-500">R$ {Number(service.price).toFixed(2)}</span>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{service.name}</h3>
+                    <span className="font-black text-red-600 dark:text-red-500">R$ {Number(service.price).toFixed(2)}</span>
                   </div>
-                  <p className="text-gray-400 text-sm mb-4">{service.description}</p>
-                  <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-6"><ClockIcon className="w-4 h-4 text-blue-500" /><span>{service.durationMinutes} min</span></div>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{service.description}</p>
+                  <div className="flex items-center gap-1 text-sm font-medium text-gray-500 dark:text-gray-400 mb-6"><ClockIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" /><span>{service.durationMinutes} min</span></div>
                   <div className="flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/30 py-2 rounded-xl font-bold hover:bg-blue-600/30 transition"><PencilSquareIcon className="w-4 h-4" /> Editar</button>
-                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-900/20 text-red-500 border border-red-500/30 py-2 rounded-xl font-bold hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
+                    <button onClick={() => handleOpenModal(service)} className="flex-1 flex items-center justify-center gap-2 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30 py-2 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/40 transition"><PencilSquareIcon className="w-4 h-4" /> Editar</button>
+                    <button onClick={() => handleDeleteService(service._id)} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-500 border border-red-200 dark:border-red-500/30 py-2 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition"><TrashIcon className="w-4 h-4" /> Apagar</button>
                   </div>
                 </div>
               ))}
@@ -240,30 +242,30 @@ export default function AdminDashboard() {
       )}
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#121212] border border-gray-800 rounded-3xl p-8 w-full max-w-lg relative">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-gray-400 hover:text-white transition"><XMarkIcon className="w-6 h-6" /></button>
-            <h3 className="text-2xl font-black text-white mb-6 flex items-center gap-2">
+        <div className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-3xl p-8 w-full max-w-lg relative shadow-2xl">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-gray-400 hover:text-gray-900 dark:hover:text-white transition"><XMarkIcon className="w-6 h-6" /></button>
+            <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-2">
               <span className="w-2 h-6 bg-red-600 rounded-full"></span>
               {editingServiceId ? 'Editar Serviço' : 'Novo Serviço'}
             </h3>
             <form onSubmit={handleSaveService} className="flex flex-col gap-4">
               <div>
-                <label className="block text-sm font-bold text-gray-400 mb-1 ml-1">Nome</label>
-                <input required type="text" value={serviceForm.name} onChange={(e) => setServiceForm({ ...serviceForm, name: e.target.value })} className="w-full bg-[#0A0A0A] border border-gray-800 rounded-xl p-3 text-white focus:border-red-600 outline-none transition" />
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-400 mb-1 ml-1">Nome</label>
+                <input required type="text" value={serviceForm.name} onChange={(e) => setServiceForm({ ...serviceForm, name: e.target.value })} className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl p-3 text-gray-900 dark:text-white focus:border-red-600 outline-none transition" />
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-400 mb-1 ml-1">Descrição</label>
-                <textarea required rows="2" value={serviceForm.description} onChange={(e) => setServiceForm({ ...serviceForm, description: e.target.value })} className="w-full bg-[#0A0A0A] border border-gray-800 rounded-xl p-3 text-white focus:border-red-600 outline-none resize-none transition"></textarea>
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-400 mb-1 ml-1">Descrição</label>
+                <textarea required rows="2" value={serviceForm.description} onChange={(e) => setServiceForm({ ...serviceForm, description: e.target.value })} className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl p-3 text-gray-900 dark:text-white focus:border-red-600 outline-none resize-none transition"></textarea>
               </div>
               <div className="flex gap-4">
                 <div className="flex-1">
-                  <label className="block text-sm font-bold text-gray-400 mb-1 ml-1">Preço (R$)</label>
-                  <input required type="number" step="0.01" value={serviceForm.price} onChange={(e) => setServiceForm({ ...serviceForm, price: e.target.value })} className="w-full bg-[#0A0A0A] border border-gray-800 rounded-xl p-3 text-white focus:border-red-600 outline-none transition" />
+                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-400 mb-1 ml-1">Preço (R$)</label>
+                  <input required type="number" step="0.01" value={serviceForm.price} onChange={(e) => setServiceForm({ ...serviceForm, price: e.target.value })} className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl p-3 text-gray-900 dark:text-white focus:border-red-600 outline-none transition" />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-sm font-bold text-gray-400 mb-1 ml-1">Tempo (min)</label>
-                  <input required type="number" value={serviceForm.durationMinutes} onChange={(e) => setServiceForm({ ...serviceForm, durationMinutes: e.target.value })} className="w-full bg-[#0A0A0A] border border-gray-800 rounded-xl p-3 text-white focus:border-red-600 outline-none transition" />
+                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-400 mb-1 ml-1">Tempo (min)</label>
+                  <input required type="number" value={serviceForm.durationMinutes} onChange={(e) => setServiceForm({ ...serviceForm, durationMinutes: e.target.value })} className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl p-3 text-gray-900 dark:text-white focus:border-red-600 outline-none transition" />
                 </div>
               </div>
               <button type="submit" className="w-full bg-red-600 text-white font-bold py-4 rounded-full hover:bg-red-700 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition mt-4">{editingServiceId ? 'Salvar' : 'Criar Serviço'}</button>
