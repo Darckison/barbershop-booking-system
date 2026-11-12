@@ -36,7 +36,7 @@ export default function Home() {
             <h1 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
               Fala, {user.name.split(' ')[0]}! ✌️
             </h1>
-            <p className="text-gray-500 mt-1">Pronto para dar aquele trato no visual hoje?</p>
+            <p className="text-gray-400 mt-1">Pronto para dar aquele trato no visual hoje?</p>
           </div>
           {/*<p className="text-sm font-bold text-barber-primary bg-orange-100 dark:bg-orange-500/10 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 shadow-sm w-fit">
             Cliente VIP
@@ -93,7 +93,7 @@ export default function Home() {
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Meus Agendamentos</h3>
-              <p className="text-gray-500 text-sm">Consulte o seu histórico e horários.</p>
+              <p className="text-gray-400 text-sm">Consulte o seu histórico e horários.</p>
             </div>
           </Link>
 
@@ -103,7 +103,7 @@ export default function Home() {
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Catálogo de Serviços</h3>
-              <p className="text-gray-500 text-sm">Explore os nossos cortes e tratamentos.</p>
+              <p className="text-gray-400 text-sm">Explore os nossos cortes e tratamentos.</p>
             </div>
           </Link>
         </div>
@@ -163,7 +163,7 @@ export default function Home() {
               <ScissorsIcon className="h-8 w-8 text-barber-primary" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Corte & Estilo</h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed">
               Técnicas clássicas e degradês modernos, respeitando o seu perfil.
             </p>
           </div>
