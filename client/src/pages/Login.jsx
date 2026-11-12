@@ -37,7 +37,7 @@ export default function Login() {
 
         <div className="text-center mb-8">
           <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
-            {loginType === 'admin' ? 'Acesso Restrito' : 'Bem-vindo de volta'}
+            {loginType === 'admin' ? 'Acesso Restrito' : 'Bem-vindo'}
           </h2>
           <p className="text-gray-500">
             {loginType === 'admin' ? 'Área exclusiva para a gestão da barbearia.' : 'Faça login para gerir os seus horários.'}
