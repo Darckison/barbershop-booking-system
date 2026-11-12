@@ -28,7 +28,7 @@ export default {
         barber: {
           dark: '#121212',
           cardDark: '#1A1A1A',
-          primary: '#FF6B00', // Laranja estilo aplicativo da imagem
+          primary: '#DC2626', // Laranja estilo aplicativo da imagem
           light: '#F8F9FA'
         }
       }
