@@ -30,13 +30,13 @@ export default function Home() {
     return (
       <div className="flex flex-col max-w-5xl mx-auto w-full gap-8 animate-in fade-in duration-500">
         
-        {/* Cabeçalho de Boas-vindas */}
+        {/* Cabeçalho de Boas-vindas - TEXTOS COM CONTRASTE ADAPTATIVO */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-4">
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
               Fala, <span className="text-blue-600 dark:text-blue-400">{user.name.split(' ')[0]}</span>! ✌️
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Pronto para dar <span className="text-red-600 font-semibold">aquele trato</span> no visual hoje?</p>
+            <p className="text-gray-600 dark:text-gray-300 mt-1 font-medium">Pronto para dar <span className="text-red-600 font-semibold">aquele trato</span> no visual hoje?</p>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Cartão Flutuante com detalhes em Azul */}
+            {/* Cartão Flutuante */}
             <div className="hidden md:flex flex-col gap-5 bg-gray-50 dark:bg-[#0A0A0A]/90 backdrop-blur-md p-6 rounded-3xl border border-gray-200 dark:border-gray-800 w-80 transform md:rotate-2 hover:rotate-0 transition-transform duration-500 shadow-xl">
               <div className="flex justify-between items-start">
                 <div className="bg-red-600 w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg">
@@ -81,7 +81,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Atalhos Rápidos com ícones azuis e vermelhos */}
+        {/* Atalhos Rápidos */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 mb-8">
           <Link to="/meus-agendamentos" className="bg-white dark:bg-[#121212] p-6 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 hover:border-red-600/60 group transition-all duration-300 flex items-center gap-6">
             <div className="bg-gray-100 dark:bg-[#0A0A0A] w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-red-50 dark:group-hover:bg-red-950/30 transition-colors border border-gray-200 dark:border-gray-800">
