@@ -142,7 +142,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="max-w-6xl mx-auto w-full animate-in fade-in duration-500">
-      {/* TÍTULO COM CONTRASTE ADAPTATIVO CLARO/ESCURO */}
       <div className="mb-8">
         <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
           Painel de <span className="text-blue-600 dark:text-blue-400">Gestão</span>
@@ -179,10 +178,10 @@ export default function AdminDashboard() {
               <table className="w-full text-left min-w-[600px]">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-800 text-gray-500">
-                    <th className="py-4 px-4 font-medium">Cliente</th>
-                    <th className="py-4 px-4 font-medium">Serviço</th>
-                    <th className="py-4 px-4 font-medium">Data / Hora</th>
-                    <th className="py-4 px-4 font-medium">Status</th>
+                    <th className="py-4 px-4 font-medium text-gray-700 dark:text-gray-400">Cliente</th>
+                    <th className="py-4 px-4 font-medium text-gray-700 dark:text-gray-400">Serviço</th>
+                    <th className="py-4 px-4 font-medium text-gray-700 dark:text-gray-400">Data / Hora</th>
+                    <th className="py-4 px-4 font-medium text-gray-700 dark:text-gray-400">Status</th>
                   </tr>
                 </thead>
                 <tbody>

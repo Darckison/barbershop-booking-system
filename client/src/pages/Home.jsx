@@ -30,17 +30,17 @@ export default function Home() {
     return (
       <div className="flex flex-col max-w-5xl mx-auto w-full gap-8 animate-in fade-in duration-500">
         
-        {/* Cabeçalho de Boas-vindas - TEXTOS COM CONTRASTE ADAPTATIVO */}
+        {/* Cabeçalho de Boas-vindas adaptativo */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-4">
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
               Fala, <span className="text-blue-600 dark:text-blue-400">{user.name.split(' ')[0]}</span>! ✌️
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-1 font-medium">Pronto para dar <span className="text-red-600 font-semibold">aquele trato</span> no visual hoje?</p>
+            <p className="text-gray-700 dark:text-gray-300 mt-1 font-medium">Pronto para dar <span className="text-red-600 font-semibold">aquele trato</span> no visual hoje?</p>
           </div>
         </div>
 
-        {/* Banner Premium */}
+        {/* Banner adaptativo */}
         <div className="relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white shadow-xl mt-2">
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-red-600/10 dark:bg-red-600/20 blur-3xl pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 rounded-full bg-blue-600/10 dark:bg-blue-600/20 blur-3xl pointer-events-none"></div>
@@ -54,7 +54,7 @@ export default function Home() {
                 Agende seu <br />
                 <span className="text-red-600">próximo corte.</span>
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg font-light">
+              <p className="text-gray-700 dark:text-gray-300 mb-8 text-lg font-light">
                 Não deixe para a última hora. Garanta o seu horário e mantenha a sua melhor versão em dia.
               </p>
               <Link
