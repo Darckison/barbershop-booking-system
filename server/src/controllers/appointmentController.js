@@ -7,14 +7,34 @@ const getAvailableSlots = async (req, res, next) => {
   try {
     const { date, serviceId } = req.query;
     if (!date || !serviceId) return res.status(400).json({ message: 'date e serviceId são obrigatórios.' });
+    
     const service = await Service.findById(serviceId);
     if (!service || !service.active) return res.status(404).json({ message: 'Serviço não encontrado ou inativo.' });
-    const config = await Availability.findOne();
-    if (!config) return res.status(500).json({ message: 'Configuração ausente.' });
+    
+    let config = await Availability.findOne();
+    
+    // AUTO-CURA: Se não existir configuração, o próprio servidor cria na hora!
+    if (!config) {
+      console.log('Configuração ausente na nuvem. Gerando horários automaticamente...');
+      const defaultWorkingHours = Array.from({length: 7}, (_, i) => ({
+        dayOfWeek: i, 
+        isOpen: i !== 0, 
+        openTime: '09:00', 
+        closeTime: '19:00', 
+        breakStart: '12:00', 
+        breakEnd: '13:00'
+      }));
+      config = await Availability.create({ workingHours: defaultWorkingHours, blockedDates: [], slotIntervalMinutes: 30 });
+    }
+
     const appointments = await Appointment.find({ date, status: { $ne: 'cancelled' } });
     
-    // CORRIGIDO AQUI: Number(service.durationMinutes)
-    return res.status(200).json(generateDailySlots({ dateStr: date, serviceDuration: Number(service.durationMinutes), availabilityConfig: config, existingAppointments: appointments }));
+    return res.status(200).json(generateDailySlots({ 
+      dateStr: date, 
+      serviceDuration: Number(service.durationMinutes), 
+      availabilityConfig: config, 
+      existingAppointments: appointments 
+    }));
   } catch (error) { next(error); }
 };
 
