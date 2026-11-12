@@ -123,12 +123,12 @@ export default function Home() {
 
         <div className="absolute z-10 bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight leading-tight">
-              Descubra o <br />
-              <span className="text-red-600">melhor estilo</span> para <span className="text-blue-400">você</span>.
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight leading-tight">
+              Mais do que um corte, <br />
+              uma <span className="text-red-600">experiência de excelência.</span>
             </h1>
-            <p className="text-gray-300 text-lg md:text-xl font-light">
-              Agende seu corte sem filas, escolha seu barbeiro favorito e desfrute de uma experiência premium.
+            <p className="text-gray-300 text-base md:text-lg font-light">
+              Venha conhecer o nosso espaço e descubra o seu novo visual. Agende sem filas e desfrute do melhor atendimento.
             </p>
           </div>
 
