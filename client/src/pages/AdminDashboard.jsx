@@ -17,11 +17,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('appointments');
-
-  // ADICIONADO: Estado para controlar o filtro de datas (Hoje, Amanhã, Todos)
   const [abaAtiva, setAbaAtiva] = useState('hoje');
-
-  // Gatilho seguro para atualizar a tabela via WebSockets
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const [appointments, setAppointments] = useState([]);
@@ -50,8 +46,6 @@ export default function AdminDashboard() {
         style: { border: '2px solid #FF6B00', padding: '16px' }
       });
 
-      // Dá meio segundo de "respiro" antes de recarregar a tabela 
-      // Isso evita atropelos de pedidos na rede (Race Condition)
       setTimeout(() => {
         setRefreshTrigger(prev => prev + 1);
       }, 500);
@@ -61,7 +55,6 @@ export default function AdminDashboard() {
       socket.disconnect();
     };
   }, [isAdmin]);
-  // ==========================================
 
   // --- LÓGICA DE AGENDAMENTOS (Protegida) ---
   const fetchAppointments = useCallback(async () => {
@@ -70,10 +63,7 @@ export default function AdminDashboard() {
       const { data } = await api.get('/appointments');
       setAppointments(data);
     } catch (error) {
-      // Ignora o erro fantasma de pedido cancelado pelo React (CanceledError)
       if (error.name === 'CanceledError' || error.message === 'canceled') return;
-
-      // Agora o Toast vai mostrar o ERRO REAL do servidor em vez de um texto genérico
       const erroReal = error.response?.data?.message || error.message;
       toast.error(`Falha: ${erroReal}`);
       console.error("ERRO DETALHADO:", error);
@@ -95,7 +85,6 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  // O React agora "escuta" o gatilho para recarregar a tabela de forma segura
   useEffect(() => {
     if (isAdmin) {
       if (activeTab === 'appointments') fetchAppointments();
@@ -145,6 +134,30 @@ export default function AdminDashboard() {
     }
   };
 
+  // ==========================================
+  // MOTOR DE FILTRAGEM DE DATAS
+  // ==========================================
+  const formatarDataIso = (dataObj) => {
+    const ano = dataObj.getFullYear();
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
+  };
+
+  const hoje = new Date();
+  const dataHojeStr = formatarDataIso(hoje);
+
+  const amanha = new Date(hoje);
+  amanha.setDate(amanha.getDate() + 1);
+  const dataAmanhaStr = formatarDataIso(amanha);
+
+  const agendamentosFiltrados = appointments.filter(appt => {
+    if (abaAtiva === 'hoje') return appt.date === dataHojeStr;
+    if (abaAtiva === 'amanha') return appt.date === dataAmanhaStr;
+    return true; // 'todos' (Histórico)
+  });
+  // ==========================================
+
   const Spinner = () => (
     <div className="flex flex-col items-center justify-center py-20">
       <ArrowPathIcon className="w-10 h-10 animate-spin text-barber-primary mb-4" />
@@ -178,7 +191,6 @@ export default function AdminDashboard() {
 
       {activeTab === 'appointments' && (
         <div>
-          {/* ADICIONADO: O componente de Filtros sendo renderizado apenas na aba de Agenda */}
           <FiltrosDashboard abaAtiva={abaAtiva} setAbaAtiva={setAbaAtiva} />
 
           {loadingAppointments ? <Spinner /> : (
@@ -193,10 +205,10 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {appointments.length === 0 ? (
-                    <tr><td colSpan="4" className="text-center py-10 text-gray-500">Nenhum agendamento registado.</td></tr>
+                  {agendamentosFiltrados.length === 0 ? (
+                    <tr><td colSpan="4" className="text-center py-10 text-gray-500">Nenhum agendamento para esta data.</td></tr>
                   ) : (
-                    appointments.map(appt => (
+                    agendamentosFiltrados.map(appt => (
                       <tr key={appt._id} className="border-b border-gray-100 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors">
                         <td className="py-4 px-4 font-bold text-gray-900 dark:text-white">
                           {appt.user?.name || 'Desconhecido'}
@@ -241,10 +253,8 @@ export default function AdminDashboard() {
                     <span className="font-black text-barber-primary">R$ {Number(service.price).toFixed(2)}</span>
                   </div>
                   
-                  {/* Ajustei o mb-6 para mb-4 aqui na descrição */}
                   <p className="text-gray-500 text-sm mb-4">{service.description}</p>
 
-                  {/* ADICIONADO: O ícone do relógio com o tempo do serviço */}
                   <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-6">
                     <ClockIcon className="w-4 h-4" />
                     <span>{service.durationMinutes} minutos</span>
