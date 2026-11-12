@@ -9,7 +9,7 @@ export default {
       colors: {
         barber: {
           dark: '#141414',
-          gold: '#D4AF37',
+          gold: '#1a0261',
           light: '#F5F5F7'
         }
       }
