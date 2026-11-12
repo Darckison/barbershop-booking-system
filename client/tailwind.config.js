@@ -9,10 +9,10 @@ export default {
     extend: {
       colors: {
         barber: {
-          dark: '#0A0A0A',      // Fundo principal ultra escuro
-          cardDark: '#121212',  // Cor dos cards e painéis
-          primary: '#DC2626',   // Vermelho premium da barbearia
-          light: '#F8F9FA'
+          dark: '#0A0A0A',      // Fundo preto ultra escuro
+          cardDark: '#121212',  // Fundo dos cards
+          primary: '#DC2626',   // Vermelho principal (destaques, agendar)
+          accentBlue: '#2563EB',// Azul moderno para detalhes e botões secundários
         }
       }
     },
